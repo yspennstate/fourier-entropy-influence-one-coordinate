@@ -1,0 +1,6 @@
+sup ratio 2.885390 at theta 1.00e-06 ; 2/ln2=2.885390
+k=2: E_i/Inf_i at the replaced coordinate = 2.672
+k=4: E_i/Inf_i at the replaced coordinate = 5.224
+k=6: E_i/Inf_i at the replaced coordinate = 7.387
+k=8: E_i/Inf_i at the replaced coordinate = 9.429
+k=10: E_i/Inf_i at the replaced coordinate = 11.439

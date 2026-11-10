@@ -1,0 +1,314 @@
+\documentclass[11pt]{amsart}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage[margin=1.1in]{geometry}
+\usepackage{hyperref}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{proposition}[theorem]{Proposition}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+
+\newcommand{\Inf}{\mathrm{Inf}}
+\newcommand{\E}{\mathbb{E}}
+
+\title{The one-coordinate step in the Fourier entropy-influence conjecture}
+\author{Yitzchak Shmalo}
+\date{}
+
+\begin{document}
+
+\begin{abstract}
+For a Boolean function $f$ and a coordinate $i$ let $D_i(f)=H(f)-\tfrac12 H(f_{i\to 1})-\tfrac12 H(f_{i\to -1})$ be the
+drop in Fourier entropy when $x_i$ is fixed. Gonz\'alez, MacManus and Pereyra observed that the Fourier
+entropy-influence conjecture follows, by induction on the dimension, if every Boolean function has a coordinate
+with $D_i(f)\le K\,\Inf_i(f)$. We show that this condition is also necessary: if the conjecture holds with constant
+$C$, then every nonconstant Boolean function has a coordinate whose erasure entropy is at most $C\,\Inf_i(f)$, and
+hence one with $D_i(f)\le (C+2/\ln 2)\Inf_i(f)$. The constant $2/\ln 2$ is the sharp bound for the Jensen--Shannon
+part of $D_i$. We also give an equivalent pseudo-likelihood form of the conjecture, a bound on the influences of
+extremal functions, and an example showing that the condition cannot be required at every coordinate.
+\end{abstract}
+
+\maketitle
+
+\section{Introduction}
+
+Let $f:\{-1,1\}^n\to\{-1,1\}$ have Fourier expansion $f=\sum_S \hat f(S)\chi_S$. By Parseval, $\mu(S)=\hat f(S)^2$
+is a probability distribution on subsets of $[n]$, the spectral distribution of $f$. Write
+\[
+H(f)=\sum_S \mu(S)\log_2\frac{1}{\mu(S)},\qquad \Inf_i(f)=\sum_{S\ni i}\mu(S),\qquad I(f)=\sum_i \Inf_i(f)=\sum_S|S|\mu(S).
+\]
+The Fourier entropy-influence (FEI) conjecture of Friedgut and Kalai~\cite{FK96} asks for a universal $C$ with
+$H(f)\le C\,I(f)$ for every Boolean $f$. It is known for many classes, among them symmetric functions and read-once
+decision trees~\cite{OWZ11}, read-once formulas~\cite{OT13,CKLS}, functions of bounded average decision-tree
+depth~\cite{WWW14}, and plateaued functions~\cite{Pot26}; the best general bound is due to Han~\cite{Han}, and the
+min-entropy version is studied in~\cite{KKLMS}.
+
+Fix a coordinate $i$ and the restrictions $f^{\pm}=f_{i\to\pm1}$. Since $I(f)=\tfrac12 I(f^+)+\tfrac12 I(f^-)+\Inf_i(f)$,
+the inequality
+\begin{equation}\label{eq:step}
+D_i(f):=H(f)-\tfrac12 H(f^+)-\tfrac12 H(f^-)\le K\,\Inf_i(f)
+\end{equation}
+for one coordinate $i$ of every Boolean $f$ gives $H(f)\le K\,I(f)$ by induction on $n$. This route is suggested by
+Han~\cite[(3.17) and the discussion after Remark 3.2]{Han} in a different local form, and is set out by Gonz\'alez, MacManus and Pereyra~\cite{GMP},
+who prove~\eqref{eq:step} along suitable decision trees for several new classes. The inequality version
+$D_1(f)\le 2$ is Lemma~3.2 of Chakraborty, Kulkarni, Lokam and Saurabh~\cite{CKLS}.
+
+Our main observation is that the route loses nothing: the one-coordinate condition is equivalent to the conjecture.
+Let $C_n=\max H(f)/I(f)$ over nonconstant Boolean $f$ on $n$ variables, and
+\[
+R_n=\max_f \min_{i:\,\Inf_i(f)>0}\frac{E_i(f)}{\Inf_i(f)},\qquad
+R'_n=\max_f \min_{i:\,\Inf_i(f)>0}\frac{D_i(f)}{\Inf_i(f)},
+\]
+with the maxima over the same functions and $E_i$ the erasure entropy defined in Section~\ref{sec:split}.
+
+\begin{theorem}\label{thm:main}
+For every $n$,
+\[
+R_n\le C_n\le \max_{m\le n}R_m+\frac{2}{\ln 2},\qquad
+\max_{m\le n} R'_m \ge C_n,\qquad R'_n\le C_n+\frac{2}{\ln 2}.
+\]
+In particular the FEI conjecture holds if and only if $\sup_n R_n<\infty$, if and only if $\sup_n R'_n<\infty$.
+\end{theorem}
+
+The proof is short. The entropy drop splits into an erasure part and a Jensen--Shannon part (this is the computation
+in~\cite[Appendix B]{GMP}); the Jensen--Shannon part is at most $(2/\ln2)\Inf_i$, with this constant sharp
+(Lemma~\ref{lem:jsd}); and the erasure parts of all coordinates add up to at most $H(f)$
+(Lemma~\ref{lem:sum}). Section~\ref{sec:more} gives the pseudo-likelihood form, the bound on extremal influences, and
+the example.
+
+\section{The split}\label{sec:split}
+
+Let $U$ be a random set with law $\mu$ and identify $U$ with its indicator vector $(X_1,\dots,X_n)$. For
+$T\subseteq[n]\setminus\{i\}$ write $a_T=\hat f(T)$ and $b_T=\hat f(T\cup\{i\})$. Then
+$\widehat{f^{\pm}}(T)=a_T\pm b_T$, so $\mu^{\pm}(T)=(a_T\pm b_T)^2$ are the spectral distributions of the two
+restrictions, and $\tfrac12(\mu^+(T)+\mu^-(T))=a_T^2+b_T^2=\Pr[U\setminus\{i\}=T]$. Let
+$h(q)=q\log_2\frac1q+(1-q)\log_2\frac1{1-q}$. Define
+\[
+E_i(f)=H(X_i\mid U\setminus\{i\})=\sum_T (a_T^2+b_T^2)\,h\!\Big(\frac{b_T^2}{a_T^2+b_T^2}\Big),
+\qquad
+J_i(f)=\mathrm{JS}(\mu^+,\mu^-),
+\]
+where $\mathrm{JS}(p,q)=H(\tfrac{p+q}2)-\tfrac12H(p)-\tfrac12H(q)$ is the Jensen--Shannon divergence in bits.
+
+\begin{lemma}[\cite{GMP}, Appendix B]\label{lem:split}
+$D_i(f)=E_i(f)+J_i(f)$.
+\end{lemma}
+
+\begin{proof}
+By the chain rule $H(f)=H(U)=H(U\setminus\{i\})+H(X_i\mid U\setminus\{i\})$. The law of $U\setminus\{i\}$ is
+$\tfrac12(\mu^++\mu^-)$, so $H(U\setminus\{i\})=\tfrac12H(f^+)+\tfrac12H(f^-)+\mathrm{JS}(\mu^+,\mu^-)$.
+\end{proof}
+
+Both parts are nonnegative, and $E_i(f)\le H(X_i)=h(\Inf_i(f))$.
+
+\begin{lemma}\label{lem:jsd}
+$J_i(f)\le \frac{2}{\ln 2}\Inf_i(f)$ for every Boolean $f$ and every coordinate $i$, and the constant is sharp.
+\end{lemma}
+
+\begin{proof}
+Write $|a_T|=r\cos\theta$, $|b_T|=r\sin\theta$ with $\theta\in[0,\pi/2]$, and $s=\sin 2\theta$. The term of $T$ in
+$J_i$ is $r^2\bigl(1-h(\tfrac{1+\sigma s}2)\bigr)$ with $\sigma=\pm1$ the sign of $a_Tb_T$; since $h$ is symmetric,
+it equals $r^2\varphi(s)/\ln 2$, where
+\[
+\varphi(s)=\tfrac12\bigl[(1+s)\ln(1+s)+(1-s)\ln(1-s)\bigr].
+\]
+The term of $T$ in $\Inf_i$ is $b_T^2=r^2\sin^2\theta$, so it suffices to show $\varphi(\sin2\theta)\le 2\sin^2\theta$.
+For $\theta\ge\pi/4$ this holds because $\varphi\le\ln2<1\le 2\sin^2\theta$. On $[0,\pi/4]$ put
+$F(\theta)=2\sin^2\theta-\varphi(\sin 2\theta)$, which is continuous. Then $F(0)=0$ and, on $[0,\pi/4)$, since
+$\varphi'(s)=\operatorname{artanh}s$ and $\cos2\theta=\sqrt{1-s^2}$ there,
+\[
+F'(\theta)=2s-2\sqrt{1-s^2}\,\operatorname{artanh}(s).
+\]
+With $s=\tanh y$, $y\ge0$, this is $2\tanh y-2y/\cosh y=2(\sinh y-y)/\cosh y\ge0$. Hence $F\ge0$ on
+$[0,\pi/4]$.
+
+For sharpness, $\varphi(s)=s^2/2+O(s^4)$, so $\varphi(\sin2\theta)/(2\sin^2\theta)\to1$ as $\theta\to0$. Take a
+Boolean $f$ and coordinate $i$ with $b_T^2/(a_T^2+b_T^2)\to 0$ uniformly in $T$ along a sequence, for example the
+function of Proposition~\ref{prop:point} below; then $J_i/\Inf_i\to 2/\ln 2$.
+\end{proof}
+
+The bound in~\cite[Lemma 8.1]{GMP} is $1-h(t)\le 4(\tfrac12-t)^2$, which gives $J_i\le 4\,\Inf_i$.
+
+\begin{lemma}\label{lem:sum}
+$\sum_{i=1}^n E_i(f)\le H(f)$.
+\end{lemma}
+
+\begin{proof}
+$H(f)=H(X_1,\dots,X_n)=\sum_i H(X_i\mid X_1,\dots,X_{i-1})\ge\sum_i H(X_i\mid X_j,\,j\ne i)=\sum_iE_i(f)$, since
+conditioning on more variables does not increase entropy.
+\end{proof}
+
+\section{Proof of Theorem~\ref{thm:main}}
+
+\emph{$R_n\le C_n$.} Let $f$ be nonconstant on $n$ variables. By Lemma~\ref{lem:sum},
+$\sum_iE_i(f)\le H(f)\le C_nI(f)=C_n\sum_i\Inf_i(f)$. The coordinates with $\Inf_i(f)=0$ have $X_i=0$ almost surely
+and $E_i(f)=0$, so some coordinate with $\Inf_i(f)>0$ has $E_i(f)\le C_n\Inf_i(f)$.
+
+\emph{$C_n\le\max_{m\le n}R_m+2/\ln2$.} Let $K=\max_{m\le n}R_m+2/\ln2$. We show $H(g)\le K\,I(g)$ for every Boolean
+$g$ on $m\le n$ variables by induction on the number of coordinates $g$ depends on. If it depends on none,
+$H(g)=I(g)=0$. Otherwise choose $i$ with $\Inf_i(g)>0$ and $E_i(g)\le R_m\Inf_i(g)$. By Lemmas~\ref{lem:split}
+and~\ref{lem:jsd}, $D_i(g)\le K\Inf_i(g)$; the restrictions $g^{\pm}$ depend on fewer coordinates, so
+\[
+H(g)=\tfrac12H(g^+)+\tfrac12H(g^-)+D_i(g)\le K\bigl(\tfrac12I(g^+)+\tfrac12I(g^-)+\Inf_i(g)\bigr)=K\,I(g).
+\]
+
+\emph{$\max_{m\le n}R'_m\ge C_n$} is the same induction with $D_i$ in place of $E_i$ and no Jensen--Shannon term,
+which is the argument of~\cite{GMP}. \emph{$R'_n\le C_n+2/\ln2$}: by Lemmas~\ref{lem:split}, \ref{lem:jsd}
+and~\ref{lem:sum}, $\sum_iD_i(f)\le H(f)+\frac2{\ln2}I(f)\le(C_n+\frac2{\ln2})I(f)$, and a coordinate with
+$\Inf_i(f)>0$ attains the average. \qed
+
+\section{Further consequences}\label{sec:more}
+
+\subsection*{A pseudo-likelihood form}
+The quantity $\sum_iE_i(f)=\sum_i H(X_i\mid X_j,\,j\neq i)$ is the pseudo-likelihood entropy of the spectral sample:
+the expected log-loss, in bits, of predicting each coordinate of $U$ from all the others.
+
+\begin{corollary}\label{cor:pl}
+If $H(f)\le C\,I(f)$ for all Boolean $f$, then $\sum_iE_i(f)\le C\,I(f)$ for all Boolean $f$. Conversely, if
+$\sum_iE_i(f)\le C\,I(f)$ for all Boolean $f$, then $H(f)\le(C+2/\ln 2)\,I(f)$ for all Boolean $f$.
+\end{corollary}
+
+\begin{proof}
+The first statement is Lemma~\ref{lem:sum}. For the second, the hypothesis gives $R_n\le C$ for all $n$ by averaging,
+and Theorem~\ref{thm:main} applies.
+\end{proof}
+
+So FEI may be read as a statement about conditional rather than joint uncertainty of the spectral sample: it is
+equivalent to asking that each element of $U$ be predictable from the rest at a cost of $O(1)$ bits per expected
+element.
+
+\subsection*{Extremal functions have small influences}
+
+\begin{proposition}\label{prop:ext}
+Let $f$ be a Boolean function on $n$ variables with $H(f)=C_nI(f)$. Then every
+coordinate with $\Inf_i(f)>0$ satisfies
+\[
+\Inf_i(f)\le 2^{\,3/\ln 2-C_{n-1}}.
+\]
+\end{proposition}
+
+\begin{proof}
+Let $p=\Inf_i(f)>0$. The restrictions are functions of $n-1$ variables, so $H(f^{\pm})\le C_{n-1}I(f^{\pm})$
+(trivially if they are constant), and $C_{n-1}\le C_n$, so
+\[
+D_i(f)=C_nI(f)-\tfrac12H(f^+)-\tfrac12H(f^-)\ge C_nI(f)-C_{n-1}\bigl(I(f)-p\bigr)\ge C_{n-1}\,p .
+\]
+On the other side $D_i(f)\le h(p)+\frac2{\ln2}p$, and $h(p)\le p\log_2\frac1p+\frac{p}{\ln 2}$ because
+$(1-p)\ln\frac1{1-p}\le p$. Dividing by $p$ gives $C_{n-1}\le\log_2\frac1p+\frac3{\ln2}$.
+\end{proof}
+
+Thus if $C_n\to\infty$, every coordinate of every extremal function has influence tending to zero. This is not true
+of arbitrary functions with a large ratio $H/I$: the function $f(x)\,x_{n+1}$ has the same entropy as $f$, total
+influence $I(f)+1$, and a coordinate with $D_{n+1}=0$.
+
+\subsection*{The condition cannot be asked of every coordinate}
+
+\begin{proposition}\label{prop:point}
+Let $k$ be even, $g$ a bent function on $\{-1,1\}^k$, $y^*$ a point, and define $f$ on $\{-1,1\}\times\{-1,1\}^k$ by
+$f(x_0,y)=g(y)$ for $y\neq y^*$ and $f(x_0,y^*)=x_0$. Then $\Inf_0(f)=2^{-k}$ and
+\[
+\frac{E_0(f)}{\Inf_0(f)}=k+\log_2e+O\!\left(2^{-k/2}\right).
+\]
+\end{proposition}
+
+\begin{proof}
+Since $f=g+\mathbf 1_{y^*}(y)\,(x_0-g(y^*))$ and $\mathbf 1_{y^*}=2^{-k}\sum_T\chi_T(y^*)\chi_T$, for
+$T\subseteq[k]$ we get $b_T=2^{-k}\chi_T(y^*)$ and $a_T=\hat g(T)-2^{-k}g(y^*)\chi_T(y^*)$. Because $g$ is bent,
+$\hat g(T)^2=2^{-k}$, so $b_T^2=4^{-k}$ and $a_T^2=2^{-k}(1\pm2^{-k/2})^2$. Hence $\Inf_0(f)=\sum_Tb_T^2=2^{-k}$, and
+every $q_T=b_T^2/(a_T^2+b_T^2)$ equals $2^{-k}(1+O(2^{-k/2}))$, so $\log_2(1/q_T)=k+O(2^{-k/2})$. Using $h(q)=q\log_2\frac1q+q\log_2e+O(q^2)$,
+\[
+E_0(f)=\sum_T(a_T^2+b_T^2)\,h(q_T)=\sum_T b_T^2\Bigl(\log_2\frac1{q_T}+\log_2e+O(q_T)\Bigr)
+=2^{-k}\bigl(k+\log_2e+O(2^{-k/2})\bigr).\qedhere
+\]
+\end{proof}
+
+The ratio is unbounded while $I(f)\approx k/2$ and $H(f)\approx k$, so FEI is not in danger: the other
+coordinates are good. For $k=2,4,6,8,10$ the exact values of $E_0/\Inf_0$ are $2.672$, $5.224$, $7.387$, $9.429$
+and $11.439$. The same function shows that the ratio $J_0/\Inf_0$ tends to $2/\ln2$, which completes the proof of
+Lemma~\ref{lem:jsd}.
+
+\begin{remark}
+A sufficient condition used in~\cite[Corollary 4.3]{GMP} is $\sum_T|\mu^+(T)-\mu^-(T)|\le K\Inf_i(f)$ for one
+coordinate, which is Han's Question~3.1~\cite{Han}, since $|\mu^+(T)-\mu^-(T)|=4|a_Tb_T|$. This fails at every
+coordinate of some read-once formulas, with ratio at least the depth~\cite{Shm}; there the one-coordinate entropy
+step~\eqref{eq:step} still holds with $K=(5+\ln4)/\ln 2$. The erasure condition behaves differently: by Lemma~\ref{lem:sum}, every
+nonconstant Boolean $f$ with $H(f)\le C\,I(f)$ has a coordinate with $E_i(f)\le C\,\Inf_i(f)$, so it cannot fail on
+any class where FEI holds.
+\end{remark}
+
+\section{Computations}
+The identity of Lemma~\ref{lem:split}, the bound of Lemma~\ref{lem:jsd} and the values in
+Proposition~\ref{prop:point} were checked numerically: the identity on all Boolean functions of four variables and on
+$40{,}000$ random functions each of five, six and seven variables at three densities, with $D_i$ computed from the
+restricted truth tables and $E_i,J_i$ from the Fourier coefficients (largest discrepancy $7\cdot10^{-15}$); the
+largest observed $J_i/\Inf_i$ was $2.806<2/\ln2\approx2.885$. On all functions of four variables
+$\max_f\min_iE_i/\Inf_i=2.672$, and on the random sample of five variables it was $2.696$. The scripts are in the
+repository accompanying this note.
+
+\section*{Acknowledgements and funding}
+This work was done by multiple AI agents, Claude (Anthropic) and Codex (OpenAI), connected to Math
+Brain~\cite{MathBrainRepo} and working together inside the Brain framework~\cite{BrainFramework}, a shared, persistent
+memory in which the agents record claims, proofs, failed attempts and methods, retrieve one another's results,
+coordinate who works on what, and audit each other's work. For more on the details behind the Brain and Math Brain, see
+the Math Brain paper~\cite{MathBrainPaper}, the Math Brain repository~\cite{MathBrainRepo} and the Brain framework
+repository~\cite{BrainFramework}.
+
+The research presented in this paper was supported by the European Research Council (ERC) under the European Union's
+Horizon Europe research and innovation programme (grant agreement No.~101041711), by the Simons Foundation as part of
+the Collaboration on the Mathematical and Scientific Foundations of Deep Learning, by Heights Labs, by Convex Nexus
+Capital, by the Israel Science Foundation (grant number 2258/19), and by the Israel Science Foundation (ISF Grant
+4101/25). Computational resources were provided in part by Google Cloud through its education credits program (credit
+530550103).
+
+\section*{Declaration of competing interest}
+The author holds equity in Heights Labs and in Convex Nexus Capital and has a management role at Convex Nexus Capital.
+These entities are included in the funding declaration above.
+
+\section*{Declaration of generative AI and AI-assisted technologies}
+The paper comes out of Math Brain, an ongoing project on the use of AI systems for research mathematics, and its
+results were developed with the Brain~\cite{BrainFramework} and Math Brain~\cite{MathBrainRepo}. In November 2026 a
+Claude Fable agent (Anthropic), connected to the Brain and working alongside Codex agents running OpenAI's GPT-6.1 on
+the same problem, derived the one-coordinate form of the conjecture, the averaging argument over coordinates and the
+bent point-replacement example, and wrote the first numerical checks. Claude Opus 5.5 (Anthropic) searched the
+literature, proved the sharp constant in Lemma~\ref{lem:jsd}, wrote independent code for every numerical claim,
+prepared the manuscript and audited it. These checks are not peer review. The author directed the work and is
+responsible for the content of the paper and for decisions concerning its dissemination.
+
+\section*{Code and data availability}
+\url{https://github.com/yspennstate/fourier-entropy-influence-one-coordinate}
+
+The paper is part of the Math Brain project, whose public repository is
+\url{https://github.com/yspennstate/math-brain-public}~\cite{MathBrainRepo}.
+
+\begin{thebibliography}{99}
+\bibitem{CKLS} S.~Chakraborty, R.~Kulkarni, S.~V.~Lokam, N.~Saurabh, Upper bounds on Fourier entropy,
+Electronic Colloquium on Computational Complexity TR13-052, 2013.
+\bibitem{FK96} E.~Friedgut, G.~Kalai, Every monotone graph property has a sharp threshold, Proc. Amer. Math. Soc.
+124 (1996), 2993--3002.
+\bibitem{GMP} M.~J.~Gonz\'alez, P.~MacManus, M.~C.~Pereyra, Further evidence towards the Fourier
+entropy-influence conjecture, arXiv:2606.00246, 2026.
+\bibitem{Han} X.~Han, A new bound for the Fourier-entropy-influence conjecture, Combinatorica 45 (2025),
+arXiv:2312.08271.
+\bibitem{KKLMS} E.~Kelman, G.~Kindler, N.~Lifshitz, D.~Minzer, M.~Safra, Towards a proof of the
+Fourier-entropy conjecture?, Geom. Funct. Anal. 30 (2020), 1097--1138.
+\bibitem{OT13} R.~O'Donnell, L.-Y.~Tan, A composition theorem for the Fourier entropy-influence conjecture,
+ICALP 2013, arXiv:1304.1347.
+\bibitem{OWZ11} R.~O'Donnell, J.~Wright, Y.~Zhou, The Fourier entropy-influence conjecture for certain classes of
+Boolean functions, ICALP 2011.
+\bibitem{Pot26} V.~N.~Potapov, On the Fourier entropy-influence conjecture for Boolean plateaued functions,
+arXiv:2609.21563, 2026.
+\bibitem{Shm} Y.~Shmalo, Read-once formulas and a question of Han on the Fourier entropy-influence conjecture,
+\url{https://github.com/yspennstate/han-question-read-once-formulas}, 2026.
+\bibitem{WWW14} A.~Wan, J.~Wright, C.~Wu, Decision trees, protocols, and the Fourier entropy-influence conjecture,
+ITCS 2014, arXiv:1312.3003.
+\bibitem{MathBrainRepo} Y.~Shmalo, \emph{Math Brain: public snapshot, code and tests}, 2026,
+\url{https://github.com/yspennstate/math-brain-public}.
+\bibitem{MathBrainPaper} Y.~Shmalo, \emph{Math Brain: shared, auditable memory for multi-agent mathematical research},
+October 2026, \url{https://github.com/yspennstate/math-brain-public/tree/main/papers/math-brain-2026-10-24}.
+\bibitem{BrainFramework} Y.~Shmalo, \emph{Brain Framework}, public software repository, 2026,
+\url{https://github.com/yspennstate/brain-framework-public}.
+\end{thebibliography}
+
+\end{document}

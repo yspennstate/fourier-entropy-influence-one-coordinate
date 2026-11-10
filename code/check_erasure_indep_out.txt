@@ -1,0 +1,10 @@
+n=4 all: (np.float64(6.661338147750939e-16), np.float64(2.398671813459048), (0, 271), np.float64(2.672488983973203))  2/ln2= 2.8853900817779268
+n=5 p=0.5: max|D-E-J|=2.22e-15 max J/Inf=2.8057 max_f min_i E_i/Inf_i=1.9155
+n=5 p=0.2: max|D-E-J|=2.22e-15 max J/Inf=2.6550 max_f min_i E_i/Inf_i=2.6959
+n=5 p=0.05: max|D-E-J|=1.44e-15 max J/Inf=2.4669 max_f min_i E_i/Inf_i=2.6959
+n=6 p=0.5: max|D-E-J|=4.44e-15 max J/Inf=2.3185 max_f min_i E_i/Inf_i=1.5903
+n=6 p=0.2: max|D-E-J|=4.00e-15 max J/Inf=2.5160 max_f min_i E_i/Inf_i=2.4662
+n=6 p=0.05: max|D-E-J|=2.89e-15 max J/Inf=2.5075 max_f min_i E_i/Inf_i=2.6340
+n=7 p=0.5: max|D-E-J|=7.16e-15 max J/Inf=1.8058 max_f min_i E_i/Inf_i=1.4363
+n=7 p=0.2: max|D-E-J|=6.05e-15 max J/Inf=2.2026 max_f min_i E_i/Inf_i=1.5530
+n=7 p=0.05: max|D-E-J|=3.97e-15 max J/Inf=2.5159 max_f min_i E_i/Inf_i=2.4373
