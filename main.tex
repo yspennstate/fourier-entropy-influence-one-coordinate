@@ -140,6 +140,9 @@ $H(f)=H(X_1,\dots,X_n)=\sum_i H(X_i\mid X_1,\dots,X_{i-1})\ge\sum_i H(X_i\mid X_
 conditioning on more variables does not increase entropy.
 \end{proof}
 
+Subadditivity gives the matching upper bound $H(f)\le\sum_iH(X_i)=\sum_ih_2(\Inf_i(f))$, where $h_2$ is the binary
+entropy; this is Claim~4.1 of Keller, Mossel and Schlank~\cite{KMS}.
+
 \section{Proof of Theorem~\ref{thm:main}}
 
 \emph{$R_n\le C_n$.} Let $f$ be nonconstant on $n$ variables. By Lemma~\ref{lem:sum},
@@ -293,6 +296,8 @@ entropy-influence conjecture, arXiv:2606.00246, 2026.
 arXiv:2312.08271.
 \bibitem{KKLMS} E.~Kelman, G.~Kindler, N.~Lifshitz, D.~Minzer, M.~Safra, Towards a proof of the
 Fourier-entropy conjecture?, Geom. Funct. Anal. 30 (2020), 1097--1138.
+\bibitem{KMS} N.~Keller, E.~Mossel, T.~Schlank, A note on the entropy/influence conjecture, Discrete Math. 312
+(2012), 3364--3372.
 \bibitem{OT13} R.~O'Donnell, L.-Y.~Tan, A composition theorem for the Fourier entropy-influence conjecture,
 ICALP 2013, arXiv:1304.1347.
 \bibitem{OWZ11} R.~O'Donnell, J.~Wright, Y.~Zhou, The Fourier entropy-influence conjecture for certain classes of
