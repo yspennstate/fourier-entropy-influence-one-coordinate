@@ -41,6 +41,12 @@ the saved outputs are next to them.
 * `code/check_sec7.py` computes E_0/Inf_0 for the bent point-replacement functions of Proposition 7,
   k = 2, 4, ..., 10.
 
+## Related papers
+
+* [Good coordinates in the Fourier entropy-influence conjecture](https://github.com/yspennstate/fei-good-coordinates)
+* [A variance form of Han's bound on the Fourier entropy](https://github.com/yspennstate/fei-variance-han-bound)
+* [Four equivalent forms of the Fourier entropy-influence conjecture](https://github.com/yspennstate/fei-equivalent-forms)
+
 ## License
 
 The text is released under CC BY 4.0 and the code under the MIT license.
