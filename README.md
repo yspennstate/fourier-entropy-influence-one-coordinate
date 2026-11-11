@@ -6,6 +6,7 @@ This repository contains a short note on the Fourier entropy-influence (FEI) con
 together with the scripts used for its numerical checks.
 
 Paper: [main.pdf](main.pdf) (source [main.tex](main.tex)).
+Zenodo: [doi:10.5281/zenodo.24126590](https://doi.org/10.5281/zenodo.24126590).
 
 A sequel, [Good coordinates in the Fourier entropy-influence conjecture](https://github.com/yspennstate/fei-good-coordinates), studies the constant of the one-coordinate condition directly: lower bounds from towers of monotone gates, upper bounds for DNFs, CNFs and read-once formulas, and examples where natural choices of the coordinate fail.
 
