@@ -90,7 +90,8 @@ E_i(f)=H(X_i\mid U\setminus\{i\})=\sum_T (a_T^2+b_T^2)\,h\!\Big(\frac{b_T^2}{a_T
 \qquad
 J_i(f)=\mathrm{JS}(\mu^+,\mu^-),
 \]
-where $\mathrm{JS}(p,q)=H(\tfrac{p+q}2)-\tfrac12H(p)-\tfrac12H(q)$ is the Jensen--Shannon divergence in bits.
+where $\mathrm{JS}(p,q)=H(\tfrac{p+q}2)-\tfrac12H(p)-\tfrac12H(q)$ is the Jensen--Shannon divergence in bits. The quantity $E_i(f)$ is the erasure entropy of Verd\'u and
+Weissman~\cite{VW08} at coordinate $i$ of the random set $U$.
 
 \begin{lemma}[\cite{GMP}, Appendix B]\label{lem:split}
 $D_i(f)=E_i(f)+J_i(f)$.
@@ -306,6 +307,8 @@ Boolean functions, ICALP 2011.
 arXiv:2609.21563, 2026.
 \bibitem{Shm} Y.~Shmalo, Read-once formulas and a question of Han on the Fourier entropy-influence conjecture,
 \url{https://github.com/yspennstate/han-question-read-once-formulas}, 2026.
+\bibitem{VW08} S.~Verd\'u, T.~Weissman, The information lost in erasures, IEEE Trans. Inform. Theory 54 (2008),
+5030--5058.
 \bibitem{WWW14} A.~Wan, J.~Wright, C.~Wu, Decision trees, protocols, and the Fourier entropy-influence conjecture,
 ITCS 2014, arXiv:1312.3003.
 \bibitem{MathBrainRepo} Y.~Shmalo, \emph{Math Brain: public snapshot, code and tests}, 2026,
