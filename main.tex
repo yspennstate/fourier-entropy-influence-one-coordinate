@@ -43,7 +43,7 @@ The Fourier entropy-influence (FEI) conjecture of Friedgut and Kalai~\cite{FK96}
 $H(f)\le C\,I(f)$ for every Boolean $f$. It is known for many classes, among them symmetric functions and read-once
 decision trees~\cite{OWZ11}, read-once formulas~\cite{OT13,CKLS}, functions of bounded average decision-tree
 depth~\cite{WWW14}, and plateaued functions~\cite{Pot26}; the best general bound is due to Han~\cite{Han}, and the
-min-entropy version is studied in~\cite{KKLMS}.
+min-entropy version is studied in~\cite{ACKSW,KKLMS}.
 
 Fix a coordinate $i$ and the restrictions $f^{\pm}=f_{i\to\pm1}$. Since $I(f)=\tfrac12 I(f^+)+\tfrac12 I(f^-)+\Inf_i(f)$,
 the inequality
@@ -141,6 +141,11 @@ $H(f)=H(X_1,\dots,X_n)=\sum_i H(X_i\mid X_1,\dots,X_{i-1})\ge\sum_i H(X_i\mid X_
 conditioning on more variables does not increase entropy.
 \end{proof}
 
+Since $H(X_{[n]\setminus\{i\}})=H(f)-E_i(f)$, Lemma~\ref{lem:sum} is equivalent to Han's inequality~\cite{Han78}
+\[
+\textstyle\sum_iH(X_{[n]\setminus\{i\}})\ge(n-1)H(X_1,\dots,X_n).
+\]
+
 Subadditivity gives the matching upper bound $H(f)\le\sum_iH(X_i)=\sum_ih_2(\Inf_i(f))$, where $h_2$ is the binary
 entropy; this is Claim~4.1 of Keller, Mossel and Schlank~\cite{KMS}.
 
@@ -167,7 +172,8 @@ $\Inf_i(f)>0$ attains the average. \qed
 
 \subsection*{A pseudo-likelihood form}
 The quantity $\sum_iE_i(f)=\sum_i H(X_i\mid X_j,\,j\neq i)$ is the pseudo-likelihood entropy of the spectral sample:
-the expected log-loss, in bits, of predicting each coordinate of $U$ from all the others.
+the expected log-loss, in bits, of predicting each coordinate of $U$ from all the others, as in Besag's
+pseudo-likelihood~\cite{Bes75}.
 
 \begin{corollary}\label{cor:pl}
 If $H(f)\le C\,I(f)$ for all Boolean $f$, then $\sum_iE_i(f)\le C\,I(f)$ for all Boolean $f$. Conversely, if
@@ -247,7 +253,8 @@ The identity of Lemma~\ref{lem:split}, the bound of Lemma~\ref{lem:jsd} and the 
 Proposition~\ref{prop:point} were checked numerically: the identity on all Boolean functions of four variables and on
 $40{,}000$ random functions each of five, six and seven variables at three densities, with $D_i$ computed from the
 restricted truth tables and $E_i,J_i$ from the Fourier coefficients (largest discrepancy $7\cdot10^{-15}$); the
-largest observed $J_i/\Inf_i$ was $2.806<2/\ln2\approx2.885$. On all functions of four variables
+largest observed $J_i/\Inf_i$ was $2.806<2/\ln2\approx2.885$, the value of $J_0/\Inf_0$ for the function of
+Proposition~\ref{prop:point} with $k=4$. On all functions of four variables
 $\max_f\min_iE_i/\Inf_i=2.672$, and on the random sample of five variables it was $2.696$. The scripts are in the
 repository accompanying this note.
 
@@ -287,6 +294,10 @@ The paper is part of the Math Brain project, whose public repository is
 \url{https://github.com/yspennstate/math-brain-public}~\cite{MathBrainRepo}.
 
 \begin{thebibliography}{99}
+\bibitem{ACKSW} S.~Arunachalam, S.~Chakraborty, M.~Kouck\'y, N.~Saurabh, R.~de~Wolf, Improved bounds on Fourier
+entropy and min-entropy, ACM Trans. Comput. Theory 13 (2021), Art.~22; STACS 2020, arXiv:1809.09819.
+\bibitem{Bes75} J.~Besag, Statistical analysis of non-lattice data, J. Roy. Statist. Soc. Ser. D (The Statistician)
+24 (1975), 179--195.
 \bibitem{CKLS} S.~Chakraborty, R.~Kulkarni, S.~V.~Lokam, N.~Saurabh, Upper bounds on Fourier entropy,
 Electronic Colloquium on Computational Complexity TR13-052, 2013.
 \bibitem{FK96} E.~Friedgut, G.~Kalai, Every monotone graph property has a sharp threshold, Proc. Amer. Math. Soc.
@@ -295,6 +306,8 @@ Electronic Colloquium on Computational Complexity TR13-052, 2013.
 entropy-influence conjecture, arXiv:2606.00246, 2026.
 \bibitem{Han} X.~Han, A new bound for the Fourier-entropy-influence conjecture, Combinatorica 45 (2025),
 arXiv:2312.08271.
+\bibitem{Han78} T.~S.~Han, Nonnegative entropy measures of multivariate symmetric correlations, Inform. Control 36
+(1978), 133--156.
 \bibitem{KKLMS} E.~Kelman, G.~Kindler, N.~Lifshitz, D.~Minzer, M.~Safra, Towards a proof of the
 Fourier-entropy conjecture?, Geom. Funct. Anal. 30 (2020), 1097--1138.
 \bibitem{KMS} N.~Keller, E.~Mossel, T.~Schlank, A note on the entropy/influence conjecture, Discrete Math. 312
