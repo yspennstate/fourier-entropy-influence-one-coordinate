@@ -1,6 +1,7 @@
 \documentclass[11pt]{amsart}
 \usepackage{amsmath,amssymb,amsthm}
 \usepackage[margin=1.1in]{geometry}
+\usepackage{array,longtable,booktabs}
 \usepackage{hyperref}
 
 \newtheorem{theorem}{Theorem}
@@ -35,7 +36,7 @@ extremal functions, and an example showing that the condition cannot be required
 
 \maketitle
 
-\section{Introduction}
+\section{Introduction}\label{sec:intro}
 
 Let $f:\{-1,1\}^n\to\{-1,1\}$ have Fourier expansion $f=\sum_S \hat f(S)\chi_S$. By Parseval, $\mu(S)=\hat f(S)^2$
 is a probability distribution on subsets of $[n]$, the spectral distribution of $f$. Write
@@ -151,10 +152,9 @@ Since $H(X_{[n]\setminus\{i\}})=H(f)-E_i(f)$, Lemma~\ref{lem:sum} is equivalent 
 \textstyle\sum_iH(X_{[n]\setminus\{i\}})\ge(n-1)H(X_1,\dots,X_n).
 \]
 
-Subadditivity gives the matching upper bound $H(f)\le\sum_iH(X_i)=\sum_ih_2(\Inf_i(f))$, where $h_2$ is the binary
-entropy; this is Claim~4.1 of Keller, Mossel and Schlank~\cite{KMS}.
+Subadditivity gives the matching upper bound $H(f)\le\sum_iH(X_i)=\sum_ih(\Inf_i(f))$; this is Claim~4.1 of Keller, Mossel and Schlank~\cite{KMS}.
 
-\section{Proof of Theorem~\ref{thm:main}}
+\section{Proof of Theorem~\ref{thm:main}}\label{sec:proof}
 
 \emph{$R_n\le C_n$.} Let $f$ be nonconstant on $n$ variables. By Lemma~\ref{lem:sum},
 $\sum_iE_i(f)\le H(f)\le C_nI(f)=C_n\sum_i\Inf_i(f)$. The coordinates with $\Inf_i(f)=0$ have $X_i=0$ almost surely
@@ -297,6 +297,44 @@ responsible for the content of the paper and for decisions concerning its dissem
 
 The paper is part of the Math Brain project, whose public repository is
 \url{https://github.com/yspennstate/math-brain-public}~\cite{MathBrainRepo}.
+
+\appendix
+\section{Notation}\label{app:notation}
+
+Symbols are listed in the order in which they first appear, and the last column gives that place. The letters $g$ and
+$p$ are reused, and each meaning has its own row.
+
+\begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.19\textwidth}>{\raggedright\arraybackslash}p{0.54\textwidth}>{\raggedright\arraybackslash}p{0.2\textwidth}@{}}
+\toprule
+Symbol & Meaning & First appears \\
+\midrule
+\endhead
+$f$ & a Boolean function $\{-1,1\}^n\to\{-1,1\}$ & Section~\ref{sec:intro} \\
+$\hat f(S)$, $\chi_S$ & the Fourier coefficient of $f$ at $S\subseteq[n]$, and the character $\prod_{i\in S}x_i$ & Section~\ref{sec:intro} \\
+$\mu$ & the spectral distribution, $\mu(S)=\hat f(S)^2$ & Section~\ref{sec:intro} \\
+$H(f)$ & the Fourier entropy $\sum_S\mu(S)\log_2(1/\mu(S))$ & Section~\ref{sec:intro} \\
+$\Inf_i(f)$ & the influence of $i$, $\sum_{S\ni i}\mu(S)$ & Section~\ref{sec:intro} \\
+$I(f)$ & the total influence $\sum_i\Inf_i(f)$ & Section~\ref{sec:intro} \\
+$C$ & a universal constant, as in $H(f)\le C\,I(f)$ & Section~\ref{sec:intro} \\
+$f^\pm$ & the restrictions $f_{i\to\pm1}$ & Section~\ref{sec:intro} \\
+$D_i(f)$ & the entropy drop $H(f)-\tfrac12H(f^+)-\tfrac12H(f^-)$ & Section~\ref{sec:intro} \\
+$K$ & a constant, as in~\eqref{eq:step} & Section~\ref{sec:intro} \\
+$C_n$ & $\max H(f)/I(f)$ over nonconstant Boolean $f$ on $n$ variables & Section~\ref{sec:intro} \\
+$E_i(f)$ & the erasure entropy $H(X_i\mid U\setminus\{i\})$, with $U$ and $X_i$ as below & Section~\ref{sec:intro} \\
+$R_n$, $R'_n$ & $\max_f\min_iE_i(f)/\Inf_i(f)$ and $\max_f\min_iD_i(f)/\Inf_i(f)$, over the same functions as $C_n$ & Section~\ref{sec:intro} \\
+$U$, $X_i$ & a random set with law $\mu$, and the indicator that $i\in U$ & Section~\ref{sec:split} \\
+$a_T$, $b_T$ & $\hat f(T)$ and $\hat f(T\cup\{i\})$ for $T\subseteq[n]\setminus\{i\}$ & Section~\ref{sec:split} \\
+$\mu^\pm$ & the spectral distributions of $f^\pm$, $\mu^\pm(T)=(a_T\pm b_T)^2$ & Section~\ref{sec:split} \\
+$h(q)$ & the binary entropy $q\log_2\frac1q+(1-q)\log_2\frac1{1-q}$ & Section~\ref{sec:split} \\
+$J_i(f)$, $\mathrm{JS}(p,q)$ & the Jensen--Shannon part $\mathrm{JS}(\mu^+,\mu^-)$ of $D_i(f)$, and the Jensen--Shannon divergence $H(\frac{p+q}2)-\frac12H(p)-\frac12H(q)$ of two laws $p$, $q$ & Section~\ref{sec:split} \\
+$r$, $\theta$, $s$, $\sigma$ & the polar form $|a_T|=r\cos\theta$, $|b_T|=r\sin\theta$, $s=\sin2\theta$, and the sign of $a_Tb_T$, in the proof of Lemma~\ref{lem:jsd} & Lemma~\ref{lem:jsd} \\
+$\varphi$, $F$ & $\varphi(s)=\frac12[(1+s)\ln(1+s)+(1-s)\ln(1-s)]$, and $F(\theta)=2\sin^2\theta-\varphi(\sin2\theta)$ & Lemma~\ref{lem:jsd} \\
+$g$, $m$ & a Boolean function on $m\le n$ variables, in the induction & Section~\ref{sec:proof} \\
+$p$ & the influence $\Inf_i(f)$, in the proof & Proposition~\ref{prop:ext} \\
+$k$, $g$, $y^*$, $x_0$ & an even number of variables, a bent function on $\{-1,1\}^k$, a point of $\{-1,1\}^k$, and the added coordinate & Proposition~\ref{prop:point} \\
+$q_T$ & $b_T^2/(a_T^2+b_T^2)$ & Proposition~\ref{prop:point} \\
+\bottomrule
+\end{longtable}
 
 \begin{thebibliography}{99}
 \bibitem{ACKSW} S.~Arunachalam, S.~Chakraborty, M.~Kouck\'y, N.~Saurabh, R.~de~Wolf, Improved bounds on Fourier
