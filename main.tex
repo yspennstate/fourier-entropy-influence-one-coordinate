@@ -94,11 +94,11 @@ $\widehat{f^{\pm}}(T)=a_T\pm b_T$, so $\mu^{\pm}(T)=(a_T\pm b_T)^2$ are the spec
 restrictions, and $\tfrac12(\mu^+(T)+\mu^-(T))=a_T^2+b_T^2=\Pr[U\setminus\{i\}=T]$. Let
 $h(q)=q\log_2\frac1q+(1-q)\log_2\frac1{1-q}$. Define
 \[
-E_i(f)=H(X_i\mid U\setminus\{i\})=\sum_T (a_T^2+b_T^2)\,h\!\Big(\frac{b_T^2}{a_T^2+b_T^2}\Big),
+E_i(f)=H(X_i\mid U\setminus\{i\})=\sum_T (a_T^2+b_T^2)\,h\!\Bigl(\frac{b_T^2}{a_T^2+b_T^2}\Bigr),
 \qquad
 J_i(f)=\mathrm{JS}(\mu^+,\mu^-),
 \]
-where $\mathrm{JS}(p,q)=H(\tfrac{p+q}2)-\tfrac12H(p)-\tfrac12H(q)$ is the Jensen--Shannon divergence in bits. The quantity $E_i(f)$ is the erasure entropy of Verd\'u and
+where $\mathrm{JS}(\nu_1,\nu_2)=H(\tfrac{\nu_1+\nu_2}2)-\tfrac12H(\nu_1)-\tfrac12H(\nu_2)$ is the Jensen--Shannon divergence in bits. The quantity $E_i(f)$ is the erasure entropy of Verd\'u and
 Weissman~\cite{VW08} at coordinate $i$ of the random set $U$.
 
 \begin{lemma}[\cite{GMP}, Appendix B]\label{lem:split}
@@ -223,17 +223,17 @@ influence $I(f)+1$, and a coordinate with $D_{n+1}=0$.
 \subsection*{The condition cannot be asked of every coordinate}
 
 \begin{proposition}\label{prop:point}
-Let $k$ be even, $g$ a bent function on $\{-1,1\}^k$, $y^*$ a point, and define $f$ on $\{-1,1\}\times\{-1,1\}^k$ by
-$f(x_0,y)=g(y)$ for $y\neq y^*$ and $f(x_0,y^*)=x_0$. Then $\Inf_0(f)=2^{-k}$ and
+Let $k$ be even, $G$ a bent function on $\{-1,1\}^k$, $y^*$ a point, and define $f$ on $\{-1,1\}\times\{-1,1\}^k$ by
+$f(x_0,y)=G(y)$ for $y\neq y^*$ and $f(x_0,y^*)=x_0$. Then $\Inf_0(f)=2^{-k}$ and
 \[
 \frac{E_0(f)}{\Inf_0(f)}=k+\log_2e+O\!\left(2^{-k/2}\right).
 \]
 \end{proposition}
 
 \begin{proof}
-Since $f=g+\mathbf 1_{y^*}(y)\,(x_0-g(y^*))$ and $\mathbf 1_{y^*}=2^{-k}\sum_T\chi_T(y^*)\chi_T$, for
-$T\subseteq[k]$ we get $b_T=2^{-k}\chi_T(y^*)$ and $a_T=\hat g(T)-2^{-k}g(y^*)\chi_T(y^*)$. Because $g$ is bent,
-$\hat g(T)^2=2^{-k}$, so $b_T^2=4^{-k}$ and $a_T^2=2^{-k}(1\pm2^{-k/2})^2$. Hence $\Inf_0(f)=\sum_Tb_T^2=2^{-k}$, and
+Since $f=G+\mathbf 1_{y^*}(y)\,(x_0-G(y^*))$ and $\mathbf 1_{y^*}=2^{-k}\sum_T\chi_T(y^*)\chi_T$, for
+$T\subseteq[k]$ we get $b_T=2^{-k}\chi_T(y^*)$ and $a_T=\hat G(T)-2^{-k}G(y^*)\chi_T(y^*)$. Because $G$ is bent,
+$\hat G(T)^2=2^{-k}$, so $b_T^2=4^{-k}$ and $a_T^2=2^{-k}(1\pm2^{-k/2})^2$. Hence $\Inf_0(f)=\sum_Tb_T^2=2^{-k}$, and
 every $q_T=b_T^2/(a_T^2+b_T^2)$ equals $2^{-k}(1+O(2^{-k/2}))$, so $\log_2(1/q_T)=k+O(2^{-k/2})$. Using $h(q)=q\log_2\frac1q+q\log_2e+O(q^2)$,
 \[
 E_0(f)=\sum_T(a_T^2+b_T^2)\,h(q_T)=\sum_T b_T^2\Bigl(\log_2\frac1{q_T}+\log_2e+O(q_T)\Bigr)
@@ -263,7 +263,7 @@ restricted truth tables and $E_i,J_i$ from the Fourier coefficients (largest dis
 largest observed $J_i/\Inf_i$ was $2.806<2/\ln2\approx2.885$, the value of $J_0/\Inf_0$ for the function of
 Proposition~\ref{prop:point} with $k=4$. On all functions of four variables
 $\max_f\min_iE_i/\Inf_i=2.672$, and on the random sample of five variables it was $2.696$. The scripts are in the
-repository accompanying this note.
+repository accompanying this paper.
 
 \section*{Acknowledgements and funding}
 This work was done by multiple AI agents, Claude (Anthropic) and Codex (OpenAI), connected to Math
@@ -303,8 +303,7 @@ The paper is part of the Math Brain project, whose public repository is
 \appendix
 \section{Notation}\label{app:notation}
 
-Symbols are listed in the order in which they first appear, and the last column gives that place. The letters $g$ and
-$p$ are reused, and each meaning has its own row.
+Symbols are listed in the order in which they first appear, and the last column gives that place.
 
 \begin{longtable}{@{}>{\raggedright\arraybackslash}p{0.19\textwidth}>{\raggedright\arraybackslash}p{0.54\textwidth}>{\raggedright\arraybackslash}p{0.2\textwidth}@{}}
 \toprule
@@ -328,12 +327,13 @@ $U$, $X_i$ & a random set with law $\mu$, and the indicator that $i\in U$ & Sect
 $a_T$, $b_T$ & $\hat f(T)$ and $\hat f(T\cup\{i\})$ for $T\subseteq[n]\setminus\{i\}$ & Section~\ref{sec:split} \\
 $\mu^\pm$ & the spectral distributions of $f^\pm$, $\mu^\pm(T)=(a_T\pm b_T)^2$ & Section~\ref{sec:split} \\
 $h(q)$ & the binary entropy $q\log_2\frac1q+(1-q)\log_2\frac1{1-q}$ & Section~\ref{sec:split} \\
-$J_i(f)$, $\mathrm{JS}(p,q)$ & the Jensen--Shannon part $\mathrm{JS}(\mu^+,\mu^-)$ of $D_i(f)$, and the Jensen--Shannon divergence $H(\frac{p+q}2)-\frac12H(p)-\frac12H(q)$ of two laws $p$, $q$ & Section~\ref{sec:split} \\
+$J_i(f)$, $\mathrm{JS}(\nu_1,\nu_2)$ & the Jensen--Shannon part $\mathrm{JS}(\mu^+,\mu^-)$ of $D_i(f)$, and the Jensen--Shannon divergence $H(\frac{\nu_1+\nu_2}2)-\frac12H(\nu_1)-\frac12H(\nu_2)$ of two laws $\nu_1$, $\nu_2$ & Section~\ref{sec:split} \\
 $r$, $\theta$, $s$, $\sigma$ & the polar form $|a_T|=r\cos\theta$, $|b_T|=r\sin\theta$, $s=\sin2\theta$, and the sign of $a_Tb_T$, in the proof of Lemma~\ref{lem:jsd} & Lemma~\ref{lem:jsd} \\
 $\varphi$, $F$ & $\varphi(s)=\frac12[(1+s)\ln(1+s)+(1-s)\ln(1-s)]$, and $F(\theta)=2\sin^2\theta-\varphi(\sin2\theta)$ & Lemma~\ref{lem:jsd} \\
 $g$, $m$ & a Boolean function on $m\le n$ variables, in the induction & Section~\ref{sec:proof} \\
 $p$ & the influence $\Inf_i(f)$ of the fixed coordinate &Proposition~\ref{prop:ext} \\
-$k$, $g$, $y^*$, $x_0$ & an even number of variables, a bent function on $\{-1,1\}^k$, a point of $\{-1,1\}^k$, and the added coordinate & Proposition~\ref{prop:point} \\
+$k$, $G$, $y^*$, $x_0$ & an even number of variables, a bent function on $\{-1,1\}^k$, a point of $\{-1,1\}^k$, and the added coordinate & Proposition~\ref{prop:point} \\
+$\mathbf 1_{y^*}$ & the indicator of the point $y^*$ & Proposition~\ref{prop:point} \\
 $q_T$ & $b_T^2/(a_T^2+b_T^2)$ & Proposition~\ref{prop:point} \\
 \bottomrule
 \end{longtable}
